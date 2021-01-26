@@ -18,7 +18,13 @@ $('#search2').keyup(function(){
             $('.display-existing-movies .row').html('')
        }else{
             searchResult=apiResult.filter(ele=>{
-                return ele.original_title.toLowerCase().indexOf(word.toLowerCase()) !== -1
+                // console.log(ele.original_title.toLowerCase())
+                if(ele.original_title){
+                    return ele.original_title.toLowerCase().indexOf(word.toLowerCase()) !== -1
+                }else{
+                    return ele.name.toLowerCase().indexOf(word.toLowerCase()) !== -1
+                }
+                
             })
             console.log(searchResult)
             secondDisplayMovies()
@@ -54,10 +60,10 @@ function displayMovies(){
                <div class="item">
                     <img src="https://image.tmdb.org/t/p/w500${ele.poster_path}" class="w-100" alt="" srcset="">
                     <div class="overlay text-center p-2">
-                        <h2 class=" text-capitalize">${ele.original_title}</h2>
+                        <h2 class=" text-capitalize">${ele.original_title ? ele.original_title: ele.name}</h2>
                         <p>${ele.overview}</p>
                         <p> rating:${ele.vote_average} </p>
-                        <p>${ele.release_date}</p>
+                        <p>${ele.release_date ? ele.release_date: ele.first_air_date}</p>
                     </div>
                 </div>
              </div>
@@ -113,10 +119,10 @@ function secondDisplayMovies(){
                <div class="item">
                     <img src="https://image.tmdb.org/t/p/w500${ele.poster_path}" class="w-100" alt="" srcset="">
                     <div class="overlay text-center p-2">
-                        <h2 class=" text-capitalize">${ele.original_title}</h2>
+                        <h2 class=" text-capitalize">${ele.original_title ? ele.original_title: ele.name}</h2>
                         <p>${ele.overview}</p>
                         <p> rating:${ele.vote_average} </p>
-                        <p>${ele.release_date}</p>
+                        <p>${ele.release_date ? ele.release_date: ele.first_air_date}</p>
                     </div>
                 </div>
              </div>
